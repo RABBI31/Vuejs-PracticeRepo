@@ -1,46 +1,67 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
+  <div>
+   <h1 v-if="characterlist.length>1">There is no Character</h1>
+   <div v-else>
+    <ul v-for="it in characterlist" :key="it">
+      <li v-for="i in it" :key="i">
+        {{ i.name }}
+        <p v-if="age<50" :style="{ backgroundColor: bgColor }">{{ i.age }}</p>
+        <p v-else-if="age<40" :style="{ backgroundColor: bgColor }">{{ i.age }}</p>
+        <p v-else :style="{ backgroundColor: bgColor }">{{ i.age }}</p>
+        <button @click="incrementAge">
+        favourite
+      </button>
+      </li>
     </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+   </div>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
-  }
+<script setup>
+import { reactive,ref, onMounted } from 'vue';
+
+const characterlist = reactive({
+  character : [{
+    name:'tyron lennister',
+    age:45,
+  },{
+    name:'Mother of Dragon',
+    age:30
+  },{
+    name:'Aquamen',
+    age:40
+  },{
+    name:'Thor',
+    age:36
+  }]
+})
+const bgColor = ref('')
+
+onMounted(() => {
+  // Generate a random color and set it as the background color
+  bgColor.value = getRandomColor()
+})
+
+function getRandomColor() {
+  // Generate a random number between 0 and 255 for each RGB component
+  const r = Math.floor(Math.random() * 256)
+  const g = Math.floor(Math.random() * 256)
+  const b = Math.floor(Math.random() * 256)
+
+  // Return the RGB color as a string in the format 'rgb(r, g, b)'
+  return `rgb(${r}, ${g}, ${b})`
+}
+
+function incrementAge(){
+  characterlist.character.forEach((ele)=>{
+    return ele.age++;
+  })
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
+
 h3 {
   margin: 40px 0 0;
 }
