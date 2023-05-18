@@ -3,6 +3,7 @@
 </template>
 
 <script>
+
 import MyApp from './components/MyApp.vue';
 
 export default {

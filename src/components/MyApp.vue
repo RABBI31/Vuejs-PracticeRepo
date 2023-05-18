@@ -1,11 +1,9 @@
 <script setup>
-import ProviderSettings from './ProviderSettings.vue';
-import ThemeColorToggle from './ThemeColorToggle.vue';
+import '../assets/style.css'
+import Header from './AppHeader.vue';
 
 </script>
 
 <template>
-  <ProviderSettings>
-    <ThemeColorToggle></ThemeColorToggle>
-  </ProviderSettings>
+   <Header />
 </template>
