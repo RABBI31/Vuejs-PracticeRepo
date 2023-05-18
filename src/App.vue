@@ -1,20 +1,13 @@
 <template>
-  <!-- <HelloWorld /> -->
-  <!-- <CounterComponent /> -->
   <MyApp />
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 import MyApp from './components/MyApp.vue';
-// import CounterComponent from './components/CounterComponent.vue'
-
 
 export default {
   name: 'App',
   components: {
-    // HelloWorld
-    // CounterComponent 
     MyApp
 
   }
